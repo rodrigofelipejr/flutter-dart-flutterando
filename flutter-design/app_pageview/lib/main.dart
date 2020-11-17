@@ -1,3 +1,4 @@
+import 'package:app_pageview/page-view-controller.builder.dart';
 import 'package:app_pageview/page-view.basic.dart';
 import 'package:app_pageview/page-view.builder.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: PageViewBuilder(),
+      home: PageViewBuilderController(),
     );
   }
 }
