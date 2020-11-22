@@ -21,17 +21,16 @@ class _PageViewBasicState extends State<PageViewBasic> {
         onPageChanged: (pageInt) {
           print("Page: $pageInt");
         },
-        scrollDirection: Axis.vertical,
-        // controller: ,
+        scrollDirection: Axis.horizontal,
         children: [
           Center(
-            child: Text("Page 1"),
+            child: Text("Home"),
           ),
           Center(
-            child: Text("Page 2"),
+            child: Text("Favoritos"),
           ),
           Center(
-            child: Text("Page 3"),
+            child: Text("Perfil"),
           ),
         ],
       ),

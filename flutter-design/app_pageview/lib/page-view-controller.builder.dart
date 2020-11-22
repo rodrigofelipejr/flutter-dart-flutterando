@@ -2,29 +2,34 @@ import 'package:flutter/material.dart';
 
 class PageViewBuilderController extends StatefulWidget {
   @override
-  _PageViewBuilderControllerState createState() =>
-      _PageViewBuilderControllerState();
+  _PageViewBuilderControllerState createState() => _PageViewBuilderControllerState();
 }
 
 class _PageViewBuilderControllerState extends State<PageViewBuilderController> {
-  List<String> pages = [
-    "Batata",
-    "Cenoura",
-    "Manjericão",
-  ];
-
   PageController controller;
+  int currentIndex = 0;
+
+  List<String> pages = [
+    "Home",
+    "Favoritos",
+    "Perfil",
+  ];
 
   @override
   void initState() {
     super.initState();
     controller = PageController(initialPage: 0);
 
-    print("initState");
-
+    /// Attach a listener which will update the state and refresh the page index
     controller.addListener(() {
-      print("Mudou de página: ${controller.page}");
-      print("Mudou de página -> ${controller.page.round()}");
+      print("controller.page ${controller.page.round()}");
+
+      if (controller.page.round() != currentIndex) {
+        setState(() {
+          print("setState");
+          currentIndex = controller.page.round();
+        });
+      }
     });
   }
 
@@ -44,7 +49,7 @@ class _PageViewBuilderControllerState extends State<PageViewBuilderController> {
             icon: Icon(Icons.keyboard_arrow_left),
             onPressed: () {
               controller.previousPage(
-                duration: Duration(milliseconds: 300),
+                duration: Duration(milliseconds: 200),
                 curve: Curves.easeInOutBack,
               );
               print("PREVIOUS");
@@ -53,15 +58,15 @@ class _PageViewBuilderControllerState extends State<PageViewBuilderController> {
           IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
-              controller.jumpTo(0);
-              print("NEXT");
+              controller.jumpToPage(0);
+              print("HOME");
             },
           ),
           IconButton(
             icon: Icon(Icons.keyboard_arrow_right),
             onPressed: () {
               controller.nextPage(
-                duration: Duration(milliseconds: 300),
+                duration: Duration(milliseconds: 200),
                 curve: Curves.easeInOutBack,
               );
               print("NEXT");
@@ -71,13 +76,27 @@ class _PageViewBuilderControllerState extends State<PageViewBuilderController> {
         centerTitle: true,
       ),
       body: PageView.builder(
+        controller: controller,
         itemCount: pages.length,
         itemBuilder: (BuildContext context, int index) {
           // return pages[index];
-          return Center(
-            child: Text(
-              pages[index],
-            ),
+          return Center(child: Text(pages[index]));
+        },
+      ),
+      bottomNavigationBar: AnimatedBuilder(
+        animation: controller,
+        builder: (BuildContext context, Widget child) {
+          return BottomNavigationBar(
+            onTap: (index) {
+              controller.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeInOutBack);
+            },
+            currentIndex: 0,
+            // currentIndex: controller.page.round(),
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(label: "Home", icon: Icon(Icons.home)),
+              BottomNavigationBarItem(label: "Favoritos", icon: Icon(Icons.favorite)),
+              BottomNavigationBarItem(label: "Conta", icon: Icon(Icons.account_box)),
+            ],
           );
         },
       ),

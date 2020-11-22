@@ -6,19 +6,10 @@ class PageViewBuilder extends StatefulWidget {
 }
 
 class _PageViewBuilderState extends State<PageViewBuilder> {
-  // List<Widget> pages = [
-  //   Center(child: Text("Page 1")),
-  //   Center(child: Text("Page 2")),
-  //   Center(child: Text("Page 3")),
-  // ];
-
   List<String> pages = [
-    "Batata",
-    "Cenoura",
-    "Manjericão",
-    "Batata",
-    "Cenoura",
-    "Manjericão",
+    "Home",
+    "Favoritos",
+    "Perfil",
   ];
 
   @override

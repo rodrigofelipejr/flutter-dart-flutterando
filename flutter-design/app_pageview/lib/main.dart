@@ -1,3 +1,4 @@
+import 'package:app_pageview/HomeWidget.dart';
 import 'package:app_pageview/page-view-controller.builder.dart';
 import 'package:app_pageview/page-view.basic.dart';
 import 'package:app_pageview/page-view.builder.dart';
@@ -13,12 +14,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'PageView',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: PageViewBuilderController(),
+      home: PageViewBasic(),
+      // home: PageViewBuilder(),
+      // home: PageViewBuilderController(), // BUG
     );
   }
 }
